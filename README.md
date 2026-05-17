@@ -1,3 +1,4 @@
+HEAD
 # 🏠 RoomSync - Dormitory Management System
 
 A comprehensive dormitory management system built with React, TypeScript, and Tailwind CSS, designed specifically for BatStateU Arasof Campus students, dormitory owners, and administrators.
@@ -297,3 +298,6 @@ This project is built for educational purposes as part of the BatStateU Arasof C
 **Version:** 2.1 (Complete Feature Set)  
 **Last Updated:** May 16, 2026  
 **Built with ❤️ for BatStateU Arasof Campus**
+=======
+# anotherroomsync
+ccd74dce495443c4e3e37ce816ed37f253cac50d
