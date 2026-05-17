@@ -1,0 +1,19 @@
+# Serve index.html for all non-file requests so SPA routes work
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /roomsyncapp/
+
+  # Allow direct access to existing files and directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Redirect everything else to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Ensure index.html is used as the directory index
+DirectoryIndex index.html index.php
+
+# Disable directory listing
+Options -Indexes

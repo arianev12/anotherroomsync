@@ -1,0 +1,35 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Print styles for receipts */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  #receipt-content,
+  #receipt-content * {
+    visibility: visible;
+  }
+  
+  #receipt-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  
+  /* Hide buttons and modal overlay when printing */
+  button,
+  .fixed.inset-0 {
+    display: none !important;
+  }
+  
+  /* Make the modal visible and take full page */
+  .bg-white.rounded-2xl {
+    box-shadow: none !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+}

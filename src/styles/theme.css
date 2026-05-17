@@ -1,0 +1,223 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #ffffff;
+  --foreground: #1e293b;
+  --card: #ffffff;
+  --card-foreground: #1e293b;
+  --popover: #ffffff;
+  --popover-foreground: #1e293b;
+  --primary: #0d9488;
+  --primary-foreground: #ffffff;
+  --secondary: #f0fdfa;
+  --secondary-foreground: #0d9488;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --accent: #ccfbf1;
+  --accent-foreground: #0d9488;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: transparent;
+  --input-background: #f8fafc;
+  --switch-background: #cbd5e1;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #0d9488;
+  --chart-1: #0d9488;
+  --chart-2: #14b8a6;
+  --chart-3: #2dd4bf;
+  --chart-4: #5eead4;
+  --chart-5: #99f6e4;
+  --radius: 0.5rem;
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #1e293b;
+  --sidebar-primary: #0d9488;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0fdfa;
+  --sidebar-accent-foreground: #0f766e;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #0d9488;
+  
+  /* Teal colors for RoomSync */
+  --teal-50: #f0fdfa;
+  --teal-100: #ccfbf1;
+  --teal-200: #99f6e4;
+  --teal-300: #5eead4;
+  --teal-400: #2dd4bf;
+  --teal-500: #14b8a6;
+  --teal-600: #0d9488;
+  --teal-700: #0f766e;
+  --teal-800: #115e59;
+  --teal-900: #134e4a;
+}
+
+.dark {
+  --background: #0a1514;
+  --foreground: #e0f7f5;
+  --card: #0f2220;
+  --card-foreground: #e0f7f5;
+  --popover: #0f2220;
+  --popover-foreground: #e0f7f5;
+  --primary: #2dd4bf;
+  --primary-foreground: #0a1514;
+  --secondary: #115e59;
+  --secondary-foreground: #99f6e4;
+  --muted: #134e4a;
+  --muted-foreground: #5eead4;
+  --accent: #0f766e;
+  --accent-foreground: #99f6e4;
+  --destructive: #ff6b6b;
+  --destructive-foreground: #ffffff;
+  --border: #115e59;
+  --input: transparent;
+  --input-background: #0f2220;
+  --switch-background: #115e59;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #2dd4bf;
+  --chart-1: #2dd4bf;
+  --chart-2: #5eead4;
+  --chart-3: #99f6e4;
+  --chart-4: #14b8a6;
+  --chart-5: #0d9488;
+  --radius: 0.5rem;
+  --sidebar: #0a1817;
+  --sidebar-foreground: #e0f7f5;
+  --sidebar-primary: #2dd4bf;
+  --sidebar-primary-foreground: #0a1514;
+  --sidebar-accent: #115e59;
+  --sidebar-accent-foreground: #5eead4;
+  --sidebar-border: #115e59;
+  --sidebar-ring: #2dd4bf;
+  
+  /* Dark mode teal variants */
+  --teal-50: #115e59;
+  --teal-100: #134e4a;
+  --teal-200: #0f766e;
+  --teal-300: #0d9488;
+  --teal-400: #14b8a6;
+  --teal-500: #2dd4bf;
+  --teal-600: #5eead4;
+  --teal-700: #99f6e4;
+  --teal-800: #ccfbf1;
+  --teal-900: #f0fdfa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+}

@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /roomsyncapp/api/
+    
+    # Allow direct access to files
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [QSA,L]
+    
+    # Allow direct access to directories
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [QSA,L]
+    
+    # Route all requests to index.php
+    RewriteRule ^(.*)$ index.php?route=$1 [QSA,L]
+</IfModule>
