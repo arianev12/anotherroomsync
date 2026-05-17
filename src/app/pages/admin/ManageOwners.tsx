@@ -1,20 +1,25 @@
 import { UserPlus, Eye } from "lucide-react";
-import { useState } from "react";
-import { owners as initialOwners } from "../../data/mockData";
+import { useEffect, useState } from "react";
 import { AddOwnerModal } from "../../components/admin/AddOwnerModal";
 import { ViewOwnerModal } from "../../components/admin/ViewOwnerModal";
 import { EditOwnerModal } from "../../components/admin/EditOwnerModal";
 import { DeleteConfirmationModal } from "../../components/admin/DeleteConfirmationModal";
 import { Toast } from "../../components/admin/Toast";
+import { useOwners } from "../../../hooks/useApi";
 
 export function ManageOwners() {
-  const [owners, setOwners] = useState(initialOwners);
+  const { owners: liveOwners } = useOwners();
+  const [owners, setOwners] = useState<any[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedOwner, setSelectedOwner] = useState<any>(null);
   const [toast, setToast] = useState({ message: "", type: "success" as "success" | "error" | "info", isVisible: false });
+
+  useEffect(() => {
+    setOwners(liveOwners);
+  }, [liveOwners]);
 
   const handleAddOwner = (newOwner: any) => {
     setOwners([...owners, newOwner]);

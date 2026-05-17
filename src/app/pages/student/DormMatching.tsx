@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { MapPin, Heart, SlidersHorizontal } from "lucide-react";
 import { useNavigate } from "react-router";
-import { dormitories } from "../../data/mockData";
+import { useDormitories } from "../../../hooks/useApi";
 
 export function DormMatching() {
   const navigate = useNavigate();
+  const { dormitories } = useDormitories();
   const [filters, setFilters] = useState({
     minPrice: 0,
     maxPrice: 10000,

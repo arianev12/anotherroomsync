@@ -122,7 +122,7 @@ export const DatabaseTestPage: React.FC = () => {
 
                 <h3>🔄 Next Steps:</h3>
                 <ol>
-                    <li>Replace mockData imports with useApi hooks in components</li>
+                    <li>Finish wiring the remaining views to useApi hooks</li>
                     <li>Update FindDormitory, DormitoryDetails pages to use API</li>
                     <li>Test adding new dormitory/room data via admin panel</li>
                     <li>Implement authentication and user-specific data endpoints</li>

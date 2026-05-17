@@ -1,16 +1,15 @@
 import { Building2, Home, Key, Users, Wrench } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { dormitories, tenantRequests, maintenanceRequests } from "../../data/mockData";
 import { GlassmorphismCard } from "../../components/GlassmorphismCard";
+import { useDormitories } from "../../../hooks/useApi";
 
 export function OwnerDashboard() {
-  // Mock data for owner (first 2 dormitories)
-  const myDorms = dormitories.slice(0, 2);
+  const { dormitories: myDorms } = useDormitories(true);
   const totalRooms = myDorms.reduce((sum, d) => sum + d.capacity, 0);
   const availableRooms = myDorms.reduce((sum, d) => sum + d.available, 0);
   const occupiedRooms = myDorms.reduce((sum, d) => sum + d.occupied, 0);
-  const pendingRequests = tenantRequests.filter(r => r.status === 'Pending').length;
-  const pendingMaintenance = maintenanceRequests.filter(r => r.status === 'Pending').length;
+  const pendingRequests = 0;
+  const pendingMaintenance = 0;
 
   const chartData = myDorms.map((d, index) => ({
     id: `dorm-${d.id}`,

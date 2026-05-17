@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Upload, X, Plus } from "lucide-react";
-import { maintenanceRequests } from "../../data/mockData";
 import { useStudent } from "../../contexts/StudentContext";
 
 export function StudentMaintenanceRequests() {
   const { currentDorm } = useStudent();
+  const maintenanceRequests: any[] = [];
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     roomNumber: '',

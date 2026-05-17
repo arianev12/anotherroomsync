@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
 import { UserCheck, Mail, Heart, X, Send } from "lucide-react";
-import { roommates } from "../../data/mockData";
 import { toast } from "sonner";
 import { motion } from "motion/react";
+
+const roommates: any[] = [];
 
 export function RoommateMatching() {
   const [preferences, setPreferences] = useState({

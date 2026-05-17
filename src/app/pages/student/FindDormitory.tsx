@@ -5,10 +5,10 @@ import {
   Moon, Sun, Sparkles, BookOpen, Home, ShieldCheck,
   Bot, SendHorizonal, Lightbulb, RotateCcw, ChevronDown,
 } from "lucide-react";
-import { dormitories } from "../../data/mockData";
 import LeafletMap from "../../components/LeafletMap";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
+import { useDormitories } from "../../../hooks/useApi";
 
 // ── Smart Search Parser ──────────────────────────────────────────────────────
 interface ParsedQuery {
@@ -72,16 +72,18 @@ function parseSmartQuery(text: string): ParsedQuery {
   return { budget, amenities: foundAmenities, availableOnly, keywords, rawText: text };
 }
 
+type DormitoryLike = any;
+
 interface SmartResult {
-  dorm: typeof dormitories[0] & { distance: number };
+  dorm: DormitoryLike & { distance: number };
   score: number;
   matchedCriteria: string[];
   missedCriteria: string[];
   isExact: boolean;
 }
 
-function scoreSmartResults(parsed: ParsedQuery): SmartResult[] {
-  return dormitories
+function scoreSmartResults(parsed: ParsedQuery, dormitoryList: DormitoryLike[]): SmartResult[] {
+  return dormitoryList
     .map(d => {
       const dist = Math.round(Math.sqrt(Math.pow((d.latitude - 14.0711) * 111, 2) + Math.pow((d.longitude - 120.6328) * 111, 2)) * 1000);
       const matched: string[] = [];
@@ -130,6 +132,7 @@ interface Tenant {
 }
 
 export function FindDormitory() {
+  const { dormitories: liveDormitories } = useDormitories();
   const navigate = useNavigate();
   const [selectedDorm, setSelectedDorm] = useState<number | null>(null);
   const [showDormModal, setShowDormModal] = useState(false);
@@ -237,7 +240,7 @@ export function FindDormitory() {
   };
 
   // ── Best roommate match score across all available rooms in a dorm ──
-  const getDormBestRmScore = (dorm: typeof dormitories[0]) => {
+  const getDormBestRmScore = (dorm: DormitoryLike) => {
     if (!hasRmPref) return -1;
     let best = -1;
     for (const room of dorm.rooms) {
@@ -252,7 +255,7 @@ export function FindDormitory() {
   };
 
   const filteredDorms = useMemo(() => {
-    return dormitories
+    return liveDormitories
       .map(d => ({
         ...d,
         distance: calculateDistance(d.latitude, d.longitude),
@@ -279,7 +282,7 @@ export function FindDormitory() {
         }
         return a.distance - b.distance;
       });
-  }, [searchTerm, priceRange, selectedAmenities, availability, rmPref]);
+  }, [liveDormitories, searchTerm, priceRange, selectedAmenities, availability, rmPref]);
 
   const toggleAmenity = (amenity: string) => {
     setSelectedAmenities(prev =>
@@ -305,7 +308,7 @@ export function FindDormitory() {
     setSmartQuery(text);
     setTimeout(() => {
       const parsed = parseSmartQuery(text);
-      const results = scoreSmartResults(parsed);
+      const results = scoreSmartResults(parsed, liveDormitories);
       setParsedQuery(parsed);
       setSmartResults(results);
       setIsSmartSearching(false);

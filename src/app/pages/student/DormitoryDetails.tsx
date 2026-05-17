@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { dormitories } from "../../data/mockData";
 import { MapPin, Users, Heart, ArrowLeft, Calendar, Send, X, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useStudent } from "../../contexts/StudentContext";
 import { toast } from "sonner";
+import { useDormitory } from "../../../hooks/useApi";
 
 export function DormitoryDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toggleFavorite, isFavorite, setCurrentDorm } = useStudent();
-  const dorm = dormitories.find(d => d.id === Number(id));
+  const { dormitory: dorm } = useDormitory(id ? Number(id) : null);
 
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [requestType, setRequestType] = useState<'visit' | 'rent'>('visit');
@@ -98,7 +98,7 @@ const [showRoommates, setShowRoommates] = useState<{ [key: number]: boolean }>({
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{dorm.name}</h1>
         <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mb-4">
           <MapPin className="w-5 h-5" />
-          <span>{dorm.address}</span>
+          <span>{dorm.location}</span>
         </div>
         <p className="text-gray-700 dark:text-gray-300 mb-6">{dorm.description}</p>
 
@@ -106,7 +106,7 @@ const [showRoommates, setShowRoommates] = useState<{ [key: number]: boolean }>({
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Amenities</h3>
           <div className="flex flex-wrap gap-2">
-            {dorm.amenities.map((amenity) => (
+            {(dorm.amenities || []).map((amenity) => (
               <span
                 key={amenity}
                 className="px-3 py-1.5 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-lg text-sm"
@@ -138,7 +138,7 @@ const [showRoommates, setShowRoommates] = useState<{ [key: number]: boolean }>({
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Available Rooms</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {dorm.rooms.map((room) => (
+          {(dorm.rooms || []).map((room) => (
             <motion.div
               key={room.id}
               whileHover={{ y: -5 }}

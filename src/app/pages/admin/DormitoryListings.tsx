@@ -1,19 +1,26 @@
 import { Eye, ShieldCheck, ShieldX, Clock, CheckCircle, XCircle, Building2 } from "lucide-react";
-import { useState } from "react";
-import { dormitories as initialDormitories } from "../../data/mockData";
+import { useEffect, useState } from "react";
 import { ViewDormitoryModal } from "../../components/admin/ViewDormitoryModal";
 import { toast } from "sonner";
+import { useDormitories } from "../../../hooks/useApi";
 
 type RegStatus = "Pending" | "Verified" | "Rejected";
 
 export function DormitoryListings() {
-  const [dormitories, setDormitories] = useState(
-    initialDormitories.map(d => ({ ...d }))
-  );
+  const { dormitories: liveDormitories } = useDormitories(true);
+  const [dormitories, setDormitories] = useState<any[]>([]);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedDormitory, setSelectedDormitory] = useState<any>(null);
   const [filterStatus, setFilterStatus] = useState<"All" | RegStatus>("All");
   const [confirmModal, setConfirmModal] = useState<{ dorm: any; action: "Verified" | "Rejected" } | null>(null);
+
+  useEffect(() => {
+    setDormitories(liveDormitories.map((dorm, index) => ({
+      ...dorm,
+      registrationStatus: dorm.registrationStatus || (index % 3 === 0 ? "Pending" : "Verified"),
+      registrationNumber: dorm.registrationNumber || `RS-${String(dorm.id).padStart(4, "0")}`
+    })));
+  }, [liveDormitories]);
 
   const handleViewDormitory = (dormitory: any) => {
     setSelectedDormitory(dormitory);

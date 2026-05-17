@@ -1,6 +1,5 @@
 import { Bell, Calendar, CheckCircle, Clock, AlertCircle, Search, X, Printer, Download, FileText, Receipt } from "lucide-react";
 import { useState } from "react";
-import { payments } from "../../data/mockData";
 import { toast } from "sonner";
 import { GlassmorphismCard } from "../../components/GlassmorphismCard";
 
@@ -19,7 +18,7 @@ export function OwnerPayments() {
   const [activeTab, setActiveTab] = useState<"reminders" | "history">("reminders");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
-  const [paymentsList, setPaymentsList] = useState<Payment[]>(payments);
+  const [paymentsList, setPaymentsList] = useState<Payment[]>([]);
   const [showReceiptModal, setShowReceiptModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
 
@@ -44,6 +43,8 @@ export function OwnerPayments() {
     paidCount: paymentsList.filter(p => p.status === "Paid").length,
     unpaidCount: paymentsList.filter(p => p.status === "Unpaid").length,
   };
+
+  const collectionRate = paymentsList.length > 0 ? Math.round((stats.paidCount / paymentsList.length) * 100) : 0;
 
   const today = new Date('2026-03-15');
 
@@ -162,7 +163,7 @@ export function OwnerPayments() {
             <div>
               <p className="text-sm text-gray-600 dark:text-gray-400">Collection Rate</p>
               <p className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">
-                {Math.round((stats.paidCount / paymentsList.length) * 100)}%
+                {collectionRate}%
               </p>
               <p className="text-xs text-blue-600 mt-1">This month</p>
             </div>

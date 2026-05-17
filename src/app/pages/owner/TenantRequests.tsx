@@ -1,5 +1,4 @@
 import { Check, X, MessageCircle, Calendar, DollarSign, Send, Clock, Phone, Home } from "lucide-react";
-import { tenantRequests, visitRequests } from "../../data/mockData";
 import { useState } from "react";
 import { toast } from "sonner";
 import { GlassmorphismCard } from "../../components/GlassmorphismCard";
@@ -7,8 +6,8 @@ import { motion } from "motion/react";
 
 export function TenantRequests() {
   const [activeTab, setActiveTab] = useState<'rent' | 'visit'>('rent');
-  const [rentRequests, setRentRequests] = useState(tenantRequests);
-  const [visitRequestsState, setVisitRequestsState] = useState(visitRequests);
+  const [rentRequests, setRentRequests] = useState<any[]>([]);
+  const [visitRequestsState, setVisitRequestsState] = useState<any[]>([]);
   const [messageModalOpen, setMessageModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<any>(null);
   const [messageText, setMessageText] = useState("");

@@ -1,10 +1,10 @@
 import { Plus, MapPin, Edit2, X, Home, Eye, Trash2, ShieldCheck, ShieldX, Clock, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router";
-import { dormitories } from "../../data/mockData";
 import { useState } from "react";
 import { toast } from "sonner";
 import { GlassmorphismCard } from "../../components/GlassmorphismCard";
 import { TenantLedgerModal, TenantInfo } from "../../components/owner/TenantLedgerModal";
+import { useDormitories } from "../../../hooks/useApi";
 
 interface EditRoom {
   id: number;
@@ -17,7 +17,7 @@ interface EditRoom {
 
 export function MyDormitories() {
   const navigate = useNavigate();
-  const myDorms = dormitories.slice(0, 2);
+  const { dormitories: myDorms } = useDormitories(true);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [viewTenantsModalOpen, setViewTenantsModalOpen] = useState(false);
   const [viewRoomsModalOpen, setViewRoomsModalOpen] = useState(false);
@@ -37,42 +37,7 @@ export function MyDormitories() {
 
   const [editRooms, setEditRooms] = useState<EditRoom[]>([]);
 
-  // Mock tenant data
-  const mockTenants: TenantInfo[] = [
-    {
-      id: 1,
-      name: "Sofia Chen",
-      roomNumber: "101",
-      email: "sofia.chen@batstateu.edu.ph",
-      course: "BS Computer Science",
-      moveInDate: "2025-01-15",
-      paymentStatus: "Paid",
-      phone: "+63 912 345 6789",
-      monthlyRent: 3500,
-    },
-    {
-      id: 2,
-      name: "Miguel Torres",
-      roomNumber: "203",
-      email: "miguel.torres@batstateu.edu.ph",
-      course: "BS Mechanical Engineering",
-      moveInDate: "2025-02-01",
-      paymentStatus: "Unpaid",
-      phone: "+63 917 234 5678",
-      monthlyRent: 4000,
-    },
-    {
-      id: 3,
-      name: "Isabella Garcia",
-      roomNumber: "305",
-      email: "isabella.garcia@batstateu.edu.ph",
-      course: "BS Business Administration",
-      moveInDate: "2024-12-01",
-      paymentStatus: "Paid",
-      phone: "+63 998 876 5432",
-      monthlyRent: 3200,
-    },
-  ];
+  const mockTenants: TenantInfo[] = [];
 
   const handleEditClick = (dorm: any) => {
     setSelectedDorm(dorm);

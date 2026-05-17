@@ -1,12 +1,13 @@
 import { Building2, Users, UserCheck, Home, Key, Eye, TrendingUp, DollarSign, AlertCircle, CheckCircle2, Clock, Activity, ArrowUpRight, ArrowDownRight, Sparkles, Shield, BarChart3 } from "lucide-react";
 import { useState } from "react";
-import { dormitories as initialDormitories, owners } from "../../data/mockData";
 import { ViewDormitoryModal } from "../../components/admin/ViewDormitoryModal";
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { motion } from "motion/react";
+import { useDormitories, useOwners } from "../../../hooks/useApi";
 
 export function AdminDashboard() {
-  const [dormitories] = useState(initialDormitories);
+  const { dormitories } = useDormitories(true);
+  const { owners } = useOwners();
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedDormitory, setSelectedDormitory] = useState<any>(null);
 

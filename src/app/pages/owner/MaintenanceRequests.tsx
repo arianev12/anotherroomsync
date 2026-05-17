@@ -1,11 +1,10 @@
-import { maintenanceRequests as initialRequests } from "../../data/mockData";
 import { Clock, CheckCircle, AlertCircle, X } from "lucide-react";
 import { GlassmorphismCard } from "../../components/GlassmorphismCard";
 import { useState } from "react";
 import { toast } from "sonner";
 
 export function OwnerMaintenanceRequests() {
-  const [requests, setRequests] = useState(initialRequests);
+  const [requests, setRequests] = useState<any[]>([]);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<any>(null);
 
